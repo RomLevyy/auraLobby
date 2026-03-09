@@ -52,3 +52,73 @@
     </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Lobby</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; text-align: center; background-color: #f0f4f8; padding: 30px; }
+        h1 { color: #333; margin-bottom: 40px; }
+        .btn-container { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+        .main-btn { width: 90%; max-width: 400px; height: 120px; font-size: 28px; font-weight: bold; cursor: pointer; border-radius: 20px; border: none; color: white; transition: transform 0.2s, box-shadow 0.2s; }
+        .create-btn { background: linear-gradient(135deg, #42b883, #347474); box-shadow: 0 8px 15px rgba(66, 184, 131, 0.3); }
+        .join-btn { background: linear-gradient(135deg, #35495e, #2c3e50); box-shadow: 0 8px 15px rgba(53, 73, 94, 0.3); }
+        .main-btn:active { transform: scale(0.95); box-shadow: none; }
+        .form-card { display: none; background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin: 20px auto; max-width: 400px; }
+        input { width: 85%; padding: 15px; margin: 10px 0; border: 2px solid #ddd; border-radius: 12px; font-size: 18px; text-align: center; }
+        .action-btn { background-color: #333; color: white; padding: 12px 30px; border: none; border-radius: 10px; font-size: 18px; cursor: pointer; margin-top: 10px; }
+        #lobby-code { font-size: 36px; color: #42b883; font-weight: bold; margin-top: 20px; padding: 10px; border: 2px dashed #42b883; display: inline-block; }
+    </style>
+</head>
+<body>
+    <h1>Aura Lobby</h1>
+    
+    <div class="btn-container">
+        <button class="main-btn create-btn" onclick="showForm('create')">CREATE LOBBY</button>
+        <button class="main-btn join-btn" onclick="showForm('join')">JOIN LOBBY</button>
+    </div>
+
+    <div id="create-form" class="form-card">
+        <h3>יצירת לובי חדש</h3>
+        <input type="text" id="c-first" placeholder="שם">
+        <input type="text" id="c-last" placeholder="שם משפחה">
+        <br>
+        <button class="action-btn" onclick="generateCode()">קבל קוד לובי</button>
+        <div id="result-area" style="display:none;">
+            <p>הקוד שלך לצורך הצטרפות:</p>
+            <div id="lobby-code"></div>
+        </div>
+    </div>
+
+    <div id="join-form" class="form-card">
+        <h3>הצטרפות ללובי קיים</h3>
+        <input type="text" id="j-first" placeholder="שם">
+        <input type="text" id="j-last" placeholder="שם משפחה">
+        <input type="text" id="j-code" placeholder="הכנס קוד לובי">
+        <br>
+        <button class="action-btn" onclick="join()">הצטרף עכשיו</button>
+    </div>
+
+    <script>
+        function showForm(type) {
+            document.getElementById('create-form').style.display = 'none';
+            document.getElementById('join-form').style.display = 'none';
+            document.getElementById(type + '-form').style.display = 'block';
+        }
+
+        function generateCode() {
+            const code = Math.floor(1000 + Math.random() * 9000);
+            document.getElementById('lobby-code').innerText = code;
+            document.getElementById('result-area').style.display = 'block';
+        }
+
+        function join() {
+            const code = document.getElementById('j-code').value;
+            if(!code) return alert("נא להזין קוד");
+            alert("מצטרף ללובי " + code + "...");
+        }
+    </script>
+</body>
+</html>
