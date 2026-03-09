@@ -1,0 +1,13 @@
+import java.util.HashMap;
+import java.util.Map;
+
+public class LobbySystem {
+    // מפתח: קוד לובי, ערך: רשימת אנשים בלובי
+    private Map<String, String> activeLobbies = new HashMap<>();
+
+    public String createLobby(String firstName, String lastName) {
+        String code = String.valueOf((int)(Math.random() * 9000) + 1000);
+        activeLobbies.put(code, firstName + " " + lastName);
+        return code;
+    }
+}
